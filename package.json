@@ -1,0 +1,23 @@
+{
+  "name": "react-express-full-stack-web-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/castorker/react-express-full-stack-web-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/castorker/react-express-full-stack-web-app/issues"
+  },
+  "homepage": "https://github.com/castorker/react-express-full-stack-web-app#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
