@@ -5,4 +5,22 @@ console.log("Hello, transpiling JSX!");
 
 var QuibbleEntityList = require('./components/QuibbleEntityList.jsx');
 
-ReactDOM.render(<QuibbleEntityList/>, app);
+var init = [{
+    id: 1,
+    text: "I'd tell you a chemistry joke but I know I wouldn't get a reaction.",
+    category: "Chemistry" 
+},{
+    id: 2,
+    text: "Why don't programmers like nature? It has too many bugs.",
+    category: "Technology" 
+},{
+    id: 3,
+    text: "Sign on the door of an internet hacker. 'Gone Phishing'.",
+    category: "Internet" 
+},{
+    id: 4,
+    text: "A crazy programmer with a cold is a coughing hacker.",
+    category: "Technology" 
+}];
+
+ReactDOM.render(<QuibbleEntityList items={init}/>, app);
