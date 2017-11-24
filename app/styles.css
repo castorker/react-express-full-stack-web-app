@@ -1,0 +1,14 @@
+.strikethrough {
+    text-decoration: line-through;
+    color: slategray;
+}
+
+.overline {
+    text-decoration: overline;
+    color: palevioletred;
+}
+
+.underline {
+    text-decoration: underline;
+    color: limegreen;
+}
