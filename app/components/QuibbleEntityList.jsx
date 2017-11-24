@@ -1,5 +1,6 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
+var QuibbleEntity = require('./QuibbleEntity.jsx');
 
 module.exports = createReactClass({
     render:function(){
@@ -9,7 +10,7 @@ module.exports = createReactClass({
                 <div>
                     {this.props.items.map(function(item, index) {
                         return (
-                            <div>{item.id}.  {item.text} - {item.category}</div>
+                            <QuibbleEntity item={item} key={"item" + index} />
                         )})
                     }
                 </div>
