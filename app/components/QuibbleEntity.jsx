@@ -5,8 +5,10 @@ module.exports = createReactClass({
     render: function(){
         return (
             <div>
-                <h4 className={this.props.item.favorite ? "" : "strikethrough"}>
-                    {this.props.item.id}. {this.props.item.text} - {this.props.item.category}
+                <h4 className={this.props.quibble.favorite ? "" : "strikethrough"}>
+                    {this.props.quibble.id}. {this.props.quibble.text} -&nbsp;
+                    {(this.props.quibble.category.trim() == "") || (this.props.quibble.category.trim().length == 0)
+                        ? "Generic" : this.props.quibble.category}
                 </h4>
             </div>
         )
