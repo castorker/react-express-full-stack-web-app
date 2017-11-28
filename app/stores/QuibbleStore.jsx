@@ -31,7 +31,7 @@ function QuibbleStore() {
         return quibbles;
     }
 
-    function getMaxId() {
+    function getMaxId() {   // ES6
         return quibbles.reduce((max, p) => p.id > max ? p.id : max, quibbles[0].id);
     }
 
@@ -43,6 +43,36 @@ function QuibbleStore() {
         triggerListeners();
     }
 
+    // ES6
+    function deleteQuibble(quibble) {
+        var index = quibbles.findIndex(function(_quibble) {
+            return _quibble.id == quibble.id;
+        });
+        
+        quibbles.splice(index, 1);
+        triggerListeners();
+    }
+
+    // ES5
+//    function deleteQuibble(quibble) { 
+//        var index;
+//        quibbles.filter(function(_quibble, _index) {
+//            if (_quibble.id == quibble.id) {
+//                index = _index;
+//            }
+//        });
+//        
+//        quibbles.splice(index, 1);
+//        triggerListeners();
+//    }
+    
+    
+    function toggleQuibbleFavorite(quibble, isFavorite) {
+        var _quibble = quibbles.filter(function(q) { return q.id == quibble.id})[0];
+        _quibble.favorite = isFavorite || false;
+        triggerListeners();
+    }
+    
     function onChange(listener) {
         listeners.push(listener);
     }
@@ -50,16 +80,25 @@ function QuibbleStore() {
     function triggerListeners() {
         listeners.forEach(function (listener) {
             listener(quibbles);
-        })
-    };
+        });
+    }
 
     dispatcher.register(function (event) {
         var split = event.type.split(':');
         if (split[0] === 'quibble-entity') {
             switch (split[1]) {
-            case "add":
-                addQuibble(event.payload);
-                break;
+                case "add":
+                    addQuibble(event.payload);
+                    break;
+                case "delete":
+                    deleteQuibble(event.payload);
+                    break;
+                case "favorite":
+                    toggleQuibbleFavorite(event.payload, true);
+                    break;
+                case "unfavorite":
+                    toggleQuibbleFavorite(event.payload, false);
+                    break;
             }
         }
     });
@@ -68,7 +107,7 @@ function QuibbleStore() {
     return {
         getAll: getAll,
         onChange: onChange
-    }
+    };
 
 }
 
