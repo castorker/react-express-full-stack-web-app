@@ -18,8 +18,8 @@ module.exports = createReactClass({
     },
     render: function(){
         return (
-            <div>
-                <div>
+            <div className="add-quibble row">
+                <div className="six columns">
                     <h4 className={this.props.quibble.favorite ? "" : "strikethrough"}>
                         {this.props.quibble.id}. {this.props.quibble.text} -&nbsp;
                         {(this.props.quibble.category.trim() == "") || (this.props.quibble.category.trim().length == 0)
@@ -28,7 +28,7 @@ module.exports = createReactClass({
                 </div>
 
                 <form className="three columns" onSubmit={this.toggleFavorite}>
-                    <button className={this.props.quibble.favorite ? "" : "button-primary"}>{this.props.quibble.favorite ? "UnFavorite" : "Favorite"}</button>
+                    <button className={this.props.quibble.favorite ? "favorite-false" : "favorite-true"}>{this.props.quibble.favorite ? "UnFavorite" : "Favorite"}</button>
                 </form>
 
                 <form className="three columns" onSubmit={this.delete}>

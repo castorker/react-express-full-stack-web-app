@@ -40,14 +40,16 @@ module.exports = createReactClass({
                     <div>
                         <input 
                             placeholder='Enter text' 
-                            value={this.state.text} 
+                            value={this.state.text}
+                            type='text'
                             onChange={this.handleInputText} 
                             required />
                     </div>
                     <div>
                         <input 
                             placeholder='Enter category' 
-                            value={this.state.category} 
+                            value={this.state.category}
+                            type='text'
                             onChange={this.handleInputCategory} />
                     </div>
                     <div>
@@ -58,7 +60,7 @@ module.exports = createReactClass({
                                         defaultChecked={this.state.favorite} />
                     </div>
                     <div>
-                        <button> Add Quibble </button>
+                        <button className="button-primary"> Add Quibble </button>
                     </div>
                 </form>
             </div>

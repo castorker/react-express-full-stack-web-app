@@ -36,7 +36,7 @@ function QuibbleStore() {
     }
 
     function addQuibble(quibble) {
-        lastId = getMaxId();
+        lastId = (quibbles.length == 0) ? 0 : getMaxId();
         quibble.id = lastId + 1;
         // console.log(quibble.id);
         quibbles.push(quibble);
