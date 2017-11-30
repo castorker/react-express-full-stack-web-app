@@ -38,20 +38,24 @@ function QuibbleStore() {
 
         quibbles.splice(index, 1);
         triggerListeners();
+
+        helper.del('api/quibbles/' + quibble.id);
     }
 
     // ES5
-    //    function deleteQuibble(quibble) { 
-    //        var index;
-    //        quibbles.filter(function(_quibble, _index) {
-    //            if (_quibble.id == quibble.id) {
-    //                index = _index;
-    //            }
-    //        });
-    //        
-    //        quibbles.splice(index, 1);
-    //        triggerListeners();
-    //    }
+//        function deleteQuibble(quibble) { 
+//            var index;
+//            quibbles.filter(function(_quibble, _index) {
+//                if (_quibble.id == quibble.id) {
+//                    index = _index;
+//                }
+//            });
+//            
+//            quibbles.splice(index, 1);
+//            triggerListeners();
+//            
+//            helper.del('api/quibbles/' + quibble.id);
+//        }
 
 
     function toggleQuibbleFavorite(quibble, isFavorite) {
@@ -60,6 +64,8 @@ function QuibbleStore() {
         })[0];
         _quibble.favorite = isFavorite || false;
         triggerListeners();
+
+        helper.patch('api/quibbles/' + quibble._id, quibble);
     }
 
     function onChange(listener) {
@@ -97,7 +103,6 @@ function QuibbleStore() {
         getAll: getAll,
         onChange: onChange
     };
-
 }
 
 module.exports = new QuibbleStore();

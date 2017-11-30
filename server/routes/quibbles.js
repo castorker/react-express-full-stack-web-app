@@ -1,33 +1,55 @@
 module.exports = function (app) {
 
-    var quibbles = [{
-        id: 1,
-        text: "I'd tell you a chemistry joke but I know I wouldn't get a reaction.",
-        category: "Chemistry",
-        favorite: true
-        }, {
-        id: 2,
-        text: "Why don't programmers like nature? It has too many bugs.",
-        category: "Technology",
-        favorite: false
-        }, {
-        id: 3,
-        text: "Sign on the door of an internet hacker. 'Gone Phishing'.",
-        category: "Internet",
-        favorite: true
-        }, {
-        id: 4,
-        text: "A crazy programmer with a cold is a coughing hacker.",
-        category: "Technology",
-        favorite: false
-        }];
+    var QuibbleEntity = require('./../model/QuibbleEntity.js');
 
     app.route('/api/quibbles')
         .get(function (req, res) {
-            res.send(quibbles);
+            QuibbleEntity.find(function (error, doc) {
+                res.send(doc);
+            });
+
         })
         .post(function (req, res) {
             var quibble = req.body;
-            quibbles.push(quibble);
+            // console.log("Adding quibble: ", quibble);
+            var quibbleEntity = new QuibbleEntity(quibble);
+            quibbleEntity.save(function (err, data) {
+                res.status(300).send();
+            });
+        });
+
+    app.route('/api/quibbles/:id')
+        .delete(function (req, res) {
+            // console.log("Deleting quibble: ", req.params.id);
+            QuibbleEntity.remove({
+                id: req.params.id
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                } else {
+                    res.json({
+                        message: 'Quibble Deleted!'
+                    });
+                }
+            });
         })
-}
+        .patch(function (req, res) {
+            // console.log("Updating quibble: ", req.body.id);
+            QuibbleEntity.findOne({
+                id: req.body.id
+            }, function (err, doc) {
+                if (err) {
+                    console.log(err);
+                    // res.send(err);
+                    res.status(404).send('Not Found');
+                } else {
+                    for (var key in req.body) {
+                        doc[key] = req.body[key];
+                    }
+                    doc.save();
+                    res.status(200).send();
+                }
+            });
+        });
+};
